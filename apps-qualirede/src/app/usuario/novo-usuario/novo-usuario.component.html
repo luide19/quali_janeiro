@@ -1,0 +1,335 @@
+<div class="historico" style="margin-top: -6px; margin-bottom:2px;">
+	<span class="header-story" style="margin-left: 2px;">                           
+	<a href="/"> <small>Home</small> / </a>           
+	<a routerLink="../usuarios"> <small>Usuários </small> / </a>
+	<a routerLink="../novousuario"> <small>Novo usuário </small> / </a>
+	<small>Edição</small>
+	</span> 
+</div>
+<div class="usuarios">
+	<h1>Usuários</h1>
+	<small>Cadastro e edição de usuários</small>
+</div>
+<form id="form-cad-usuario" class="form-horizontal" [formGroup]="userForm" (ngSubmit)="userSubmit()" novalidate>
+<div class="salvar-cancelar">
+	<div class="salvar">   
+		<button id="btnSalvar" type="submit">              
+		<i class="fa fa-save"></i>
+		<small>Salvar</small>
+		</button>  
+	</div>
+	<div class="cancelar">   
+		<button id="btnCancelar" type="reset">
+		<i class="fa fa-close"></i> 
+		<small>Cancelar</small>
+		</button>                                               
+	</div>
+</div>
+<div class="panel widget light-widget panel-bd-top">
+<section class="col-md-12" id="section2" style="background-color: #FFF;">
+	<div id="informacoesGerais">
+		<h3 style="color: #C63131">Filtro</h3>
+	</div>
+	<br>
+
+		<div class="col-md-12">
+			<div class="col-md-6">
+				<div class="form-group row">
+					<div class="col-md-12">
+						<label class="col-xs-3 col-form-label control-label">Nome</label>
+						<div class="controls col-xs-9">
+							<input class="form-control"  formControlName="nome" type="text" placeholder="Informe o nome">
+						</div>
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-md-12">
+						<label class="col-xs-3 col-form-label control-label">Login</label>
+						<div class="controls col-xs-9">
+							<input class="form-control"  formControlName="login" type="text" placeholder="Informe o login">
+						</div>
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-md-12">
+						<label class="col-xs-3 col-form-label control-label">CPF</label>
+						<div class="controls col-xs-9">
+							<input class="form-control" formControlName="cpf" type="text" maxlength="11" placeholder="Informe o CPF">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group row">
+					<div class="col-md-12">
+						<label class="col-xs-3 col-form-label control-label">E-mail</label>
+						<div class="controls col-xs-9">
+							<input class="form-control" formControlName="email" type="email" placeholder="Informe o e-mail">
+						</div>
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-md-12">
+						<label class="col-xs-3 col-form-label control-label">Senha</label>
+						<div class="controls col-xs-9">
+							<input class="form-control" formControlName="senha" type="password" placeholder="Informe o senha">
+						</div>
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-md-12">
+						<label class="col-xs-3 col-form-label control-label">Bloqueado</label>
+						<div class="controls col-xs-9">
+							<input type="checkbox" (change)="bloqueado($event)" value="Bloqueado"> 
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="col-md-12 panel-bd-top">
+			<div class="div-tipos-setor">
+				<div id="informacoesGerais">
+					<h3 style="color: #C63131">Perfil</h3>
+				</div>
+				<br>
+				<div class="form-group row">
+					<div class="col-md-6">
+						<label class="col-xs-4 col-form-label control-label">Perfil de usuário</label>
+						<div class="controls col-xs-8">
+							<select class="form-control" name="perfilUsuario" id="perfil-select" style="cursor: pointer; " (change)="selecionar($event)">
+								<option *ngFor="let n of option" [value]="n.value"> 
+									{{n.name}}
+								</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="form-group row">
+					<div id="btns" class="col-xs-12">
+						<input style="margin-top:-2px;" type="checkbox" class="btn btn-pesquisar" id="aplicar" (change)="aplicar($event)">
+						<span style="margin-left:2px">Aplicar</span> 
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<br>
+		<div id="perfil-sistema" class="col-md-12 panel-bd-top">
+			<div id="informacoesGerais">
+				<h3 style="color: #C63131">Sistemas</h3>
+			</div>
+			<br />
+			<div id="cadastro">
+				<span class="span-cadastro">Cadastro</span>
+				<a href="javascript://" class="link-form"> <i class="fa fa-caret-square-o-down"></i> </a> 
+				<h4>Papeis</h4>
+				<div class="papeis" *ngFor="let Perfil of Cadastro; let i=index">
+					<label> 
+						<input [checked]="Perfil.selected" type="checkbox" [value]="Perfil.value" (change)="onCheckboxChange($event)">
+						{{Perfil.name}}
+					</label>
+				</div>
+				<br>
+			</div>
+			<hr>
+			<div id="auditoriaConcorrente">
+				<span class="span-cadastro">Auditoria Concorrente</span>
+				<a href="javascript://" class="link-form"><i class="fa fa-caret-square-o-down"></i></a>
+				<h4>Papeis</h4>
+				<div class="papeis" *ngFor="let Perfil of AuditoriaConcorrente; let i=index">
+					<label> 
+						<input [checked]="Perfil.selected" type="checkbox" [value]="Perfil.value" (change)="onCheckboxChange($event)">
+						{{Perfil.name}}
+					</label>
+				</div>
+				<br>
+			</div>
+			<hr>
+			<div id="pagamento">
+				<span class="span-cadastro">Pagamento</span>
+				<a href="javascript://" class="link-form"><i class="fa fa-caret-square-o-down"></i></a>
+				<h4>Papeis</h4>
+				<div class="papeis" *ngFor="let Perfil of Pagamento; let i=index">
+					<label> 
+						<input [checked]="Perfil.selected" type="checkbox" [value]="Perfil.value" (change)="onCheckboxChange($event)">
+						{{Perfil.name}}
+					</label>
+				</div>
+				<br />
+			</div>
+			<hr>
+			<div id="relatoriosBI">
+				<span class="span-cadastro">Relatórios BI</span> 
+				<a href="javascript://" class="link-form"><i class="fa fa-caret-square-o-down"></i></a>
+				<h4>Papeis</h4>
+				<div class="papeis" *ngFor="let Perfil of RelatorioBI; let i=index">
+					<label> 
+						<input [checked]="Perfil.selected" type="checkbox" [value]="Perfil.value" (change)="onCheckboxChange($event)">
+						{{Perfil.name}}
+					</label>
+				</div>
+				<br>
+			</div>
+			<hr>
+			<div id="credenciamento">
+				<span class="span-cadastro">Credenciamento</span> 
+				<a href="javascript://" class="link-form"><i class="fa fa-caret-square-o-down"></i></a>
+				<h4>Papeis</h4>
+				<div class="papeis" *ngFor="let Perfil of Credenciamento; let i=index">
+					<label> 
+						<input [checked]="Perfil.selected" type="checkbox" [value]="Perfil.value" (change)="onCheckboxChange($event)">
+						{{Perfil.name}}
+					</label>
+				</div>
+				<br>
+				<hr>
+				<div id="ais">
+					<span class="span-cadastro">Atenção Integral a Saúde</span>
+					<a href="javascript://" class="link-form"><i class="fa fa-caret-square-o-down"></i></a>
+					<h4>Papeis</h4>
+					<div class="papeis" *ngFor="let Perfil of AIS; let i=index">
+						<label> 
+							<input [checked]="Perfil.selected" type="checkbox" [value]="Perfil.value" (change)="onCheckboxChange($event)">
+							{{Perfil.name}}
+						</label>
+					</div>
+					<br>
+				</div>
+				<hr>
+				<div id="core">
+					<span class="span-cadastro">Core</span>
+					<a href="javascript://" class="link-form"><i class="fa fa-caret-square-o-down"></i></a>
+					<h4>Papeis</h4>
+					<div class="papeis" *ngFor="let Perfil of Core; let i=index">
+						<label> 
+							<input [checked]="Perfil.selected" type="checkbox" [value]="Perfil.value" (change)="onCheckboxChange($event)">
+							{{Perfil.name}}
+						</label>
+					</div>
+					<br>
+				</div>
+				<hr>
+				<div id="relacionamento">
+					<span class="span-cadastro">Relacionamento</span>   
+					<a href="javascript://" class="link-form"><i class="fa fa-caret-square-o-down"></i></a>
+					<h4>Papeis</h4>
+					<div class="papeis" *ngFor="let Perfil of Relacionamento; let i=index">
+						<label> 
+							<input [checked]="Perfil.selected" type="checkbox" [value]="Perfil.value" (change)="onCheckboxChange($event)">
+							{{Perfil.name}}
+						</label>
+					</div>
+					<br>
+				</div>
+				<hr>
+				<div id="relatorios">
+					<span class="span-cadastro">Relatórios</span>
+					<a href="javascript://" class="link-form"><i class="fa fa-caret-square-o-down"></i></a>
+					<h4>Papeis</h4>
+					<div class="papeis" *ngFor="let Perfil of Relatorios; let i=index">
+						<label> 
+							<input [checked]="Perfil.selected" type="checkbox" [value]="Perfil.value" (change)="onCheckboxChange($event)">
+							{{Perfil.name}}
+						</label>
+					</div>
+					<br>
+				</div>
+				<hr>
+				<div id="cobranca">
+					<span class="span-cadastro">Cobrança</span>
+					<a href="javascript://" class="link-form"><i class="fa fa-caret-square-o-down"></i></a>
+					<h4>Papeis</h4>
+					<div class="papeis" *ngFor="let Perfil of Cobranca; let i=index">
+						<label> 
+							<input [checked]="Perfil.selected" type="checkbox" [value]="Perfil.value" (change)="onCheckboxChange($event)">
+							{{Perfil.name}}
+						</label>
+					</div>
+					<br>
+				</div>
+				<hr>
+				<div id="setup">
+					<span class="span-cadastro">Setup</span>
+					<a href="javascript://" class="link-form"><i class="fa fa-caret-square-o-down"></i></a>
+					<h4>Papeis</h4>
+					<div class="papeis" *ngFor="let Perfil of Setup; let i=index">
+						<label> 
+							<input [checked]="Perfil.selected" type="checkbox" [value]="Perfil.value" (change)="onCheckboxChange($event)">
+							{{Perfil.name}}
+						</label>
+					</div>
+					<br>
+				</div>
+				<hr>
+				<div id="analiseDeContas">
+					<span class="span-cadastro">Análise de Contas</span>
+					<a href="javascript://" class="link-form"><i class="fa fa-caret-square-o-down"></i></a>
+					<h4>Papeis</h4>
+					<div class="papeis" *ngFor="let Perfil of AnaliseDeContas; let i=index">
+						<label> 
+							<input [checked]="Perfil.selected" type="checkbox" [value]="Perfil.value" (change)="onCheckboxChange($event)">
+							{{Perfil.name}}
+						</label>
+					</div>
+					<br>
+				</div>
+				<hr>
+				<div id="autorizacao">
+					<span class="span-cadastro">Autorização</span>  
+					<a href="javascript://" class="link-form"><i class="fa fa-caret-square-o-down"></i></a>
+					<h4>Papeis</h4>
+					<div class="papeis" *ngFor="let Perfil of Autorizacao; let i=index">
+						<label> 
+							<input [checked]="Perfil.selected" type="checkbox" [value]="Perfil.value" (change)="onCheckboxChange($event)">
+							{{Perfil.name}}
+						</label>
+					</div>
+			
+					<br>
+				</div>
+				<hr>
+				<div id="atendimento">
+					<span class="span-cadastro">Atendimento</span>
+					<a href="javascript://" class="link-form"><i class="fa fa-caret-square-o-down"></i></a>
+					<h4>Papeis</h4>
+					<div class="papeis" *ngFor="let Perfil of Atendimento; let i=index">
+						<label> 
+							<input [checked]="Perfil.selected" type="checkbox" [value]="Perfil.value" (change)="onCheckboxChange($event)">
+							{{Perfil.name}}
+						</label>
+					</div>
+					<br>
+				</div>
+				<hr>
+				<div id="editorDeRegras">
+					<span class="span-cadastro">Editor de Regras</span>
+					<a href="javascript://" class="link-form"><i class="fa fa-caret-square-o-down"></i></a>
+					<h4>Papeis</h4>
+					<div class="papeis" *ngFor="let Perfil of EditorDeRegras; let i=index">
+						<label> 
+							<input [checked]="Perfil.selected" type="checkbox" [value]="Perfil.value" (change)="onCheckboxChange($event)">
+							{{Perfil.name}}
+						</label>
+					</div>
+					<br>
+				</div>
+				<hr>
+				<div id="faturamento">
+					<span class="span-cadastro">Faturamento</span>
+					<a href="javascript://" class="link-form"><i class="fa fa-caret-square-o-down"></i></a>
+					<h4>Papeis</h4>
+					<div class="papeis" *ngFor="let Perfil of Faturamento; let i=index">
+						<label> 
+							<input [checked]="Perfil.selected" type="checkbox" [value]="Perfil.value" (change)="onCheckboxChange($event)">
+							{{Perfil.name}}
+						</label>
+					</div>
+					<br>
+				</div>
+			</div>
+        </div>
+	
+</section>
+</div>
+</form>

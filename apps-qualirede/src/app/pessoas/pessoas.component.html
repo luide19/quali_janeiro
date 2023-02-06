@@ -1,0 +1,91 @@
+<div class="historico" style="margin-top: -6px; margin-bottom:2px;">
+    <span class="header-story" style="margin-left: 2px;">                           
+        <a routerLink="/"> <small>Home</small> / </a>           
+        <a routerLink="../tipousuario"> <small>Tipo de usuário</small> / </a>
+        <a routerLink="../novotipousuario"> <small>Novo tipo de usuário</small> / </a>
+        <small>Edição</small>
+    </span> 
+</div>
+<div class="usuarios">
+    <h1>Pessoas </h1>
+    <small>Cadastro de pessoas</small>
+</div>
+<form id="form-cad-tipousuario"  class="form-horizontal" method="POST" [formGroup]="pessoas" (ngSubmit)="userSubmit()" novalidate>
+<div class="salvar-cancelar">
+    <div class="salvar">   
+        <button id="btnSalvar">              
+            <i class="fa fa-save"></i>
+            <small>Salvar</small> 
+        </button>  
+    </div>
+    <div class="cancelar">   
+        <button id="btnCancelar" type="reset">
+            <i class="fa fa-close"></i> 
+            <small>Cancelar</small>
+        </button>                                               
+    </div>
+</div>
+
+<div class="panel widget light-widget panel-bd-top">
+    <section class="col-md-12" id="section2" style="background-color: #FFF;">
+        <div id="informacoesGerais">
+            <h3 style="color: #C63131">Filtro</h3>
+        </div>
+        <br>
+        <div class="col-md-12">
+			<div class="col-md-6">
+				<div class="form-group row">
+					<div class="col-md-12">
+						<label class="col-xs-3 col-form-label control-label">Nome</label>
+						<div class="controls col-xs-9">
+							<input class="form-control"  formControlName="nome" type="text" placeholder="Informe o nome">
+						</div>
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-md-12">
+						<label class="col-xs-3 col-form-label control-label">Login</label>
+						<div class="controls col-xs-9">
+							<input class="form-control"  formControlName="login" type="text" placeholder="Informe o login">
+						</div>
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-md-12">
+						<label class="col-xs-3 col-form-label control-label">CPF</label>
+						<div class="controls col-xs-9">
+							<input class="form-control" formControlName="cpf" type="text" maxlength="11" placeholder="Informe o CPF">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group row">
+					<div class="col-md-12">
+						<label class="col-xs-3 col-form-label control-label">E-mail</label>
+						<div class="controls col-xs-9">
+							<input class="form-control" formControlName="email" type="email" placeholder="Informe o e-mail">
+						</div>
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-md-12">
+						<label class="col-xs-3 col-form-label control-label">Senha</label>
+						<div class="controls col-xs-9">
+							<input class="form-control" formControlName="senha" type="password" placeholder="Informe o senha">
+						</div>
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-md-12">
+						<label class="col-xs-3 col-form-label control-label">Bloqueado</label>
+						<div class="controls col-xs-9">
+							<input type="checkbox" (change)="bloqueado($event)" value="Bloqueado"> 
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    </section>
+</div>
+</form>

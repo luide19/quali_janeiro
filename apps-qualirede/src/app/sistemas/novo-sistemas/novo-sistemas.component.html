@@ -1,0 +1,59 @@
+<div class="historico" style="margin-top: -6px; margin-bottom:2px;">
+    <span class="header-story" style="margin-left: 2px;">                           
+        <a routerLink="/"> <small>Home</small> / </a>           
+        <a routerLink="../tipousuario"> <small>Tipo de usuário</small> / </a>
+        <a routerLink="../novotipousuario"> <small>Novo tipo de usuário</small> / </a>
+        <small>Edição</small>
+    </span> 
+</div>
+<div class="usuarios">
+    <h1>Setor </h1>
+    <small>Cadastro e edição de Setor</small>
+</div>
+<form id="form-cad-tipousuario"  class="form-horizontal" method="POST" [formGroup]="novo_sistemas" (ngSubmit)="userSubmit()" novalidate>
+<div class="salvar-cancelar">
+    <div class="salvar">   
+        <button id="btnSalvar">              
+            <i class="fa fa-save"></i>
+            <small>Salvar</small> 
+        </button>  
+    </div>
+    <div class="cancelar">   
+        <button id="btnCancelar" type="reset">
+            <i class="fa fa-close"></i> 
+            <small>Cancelar</small>
+        </button>                                               
+    </div>
+</div>
+
+<div class="panel widget light-widget panel-bd-top">
+    <section class="col-md-12" id="section2" style="background-color: #FFF;">
+        <div id="informacoesGerais">
+            <h3 style="color: #C63131">Filtro</h3>
+        </div>
+        <br>
+       
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <label class="col-xs-3 col-form-label control-label">Bloqueado</label>
+                            <div class="controls col-xs-9">
+                                <input class="check_blok" (change)="bloqueado($event)" formArrayName="bloqueado" name="bloqueado" type="checkbox" value="Bloqueado">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <label class="col-xs-3 col-form-label control-label">Sistema</label>
+                            <div class="controls col-xs-9">
+                                <input class="form-control" for="tipoUsuario" formControlName="nome" name="tipoUsuario" type="text" placeholder="Informe o tipo de Setor">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+    </section>
+</div>
+</form>
