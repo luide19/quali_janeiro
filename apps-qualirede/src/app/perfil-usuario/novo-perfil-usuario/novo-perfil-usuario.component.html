@@ -59,44 +59,23 @@
     <div class="col-md-12">
         <div class="col-md-3">
             <h3 style="color: #C63131">Tipo de Usuário</h3>
-            <div class="form-group row check_blok">
-                <div class="col-md-12">
-                    <label class="col-xs-4 col-form-label control-label">Cliente</label>
-                    <div class="controls col-xs-3">
-                        <input class="check_blok" value="Cliente" type="checkbox">
-                    </div>
-                </div>
-
-                <div class="col-md-12">
-                    <label class="col-xs-4 col-form-label control-label">Colaborador</label>
-                    <div class="controls col-xs-3">
-                        <input class="check_blok" value="Colaborador" style="margin-top:15px;" type="checkbox">
-                    </div>
-                </div>
-
-                <div class="col-md-12">
-                    <label class="col-xs-4 col-form-label control-label">Prestador</label>
-                    <div class="controls col-xs-3">
-                        <input class="check_blok" value="Prestador" style="margin-top:15px;" type="checkbox">
-                    </div>
-                </div>
+            <div class="form-group row check_blok" *ngFor="let TipoDeUsuario of tipo_de_usuario">
+				<label style="margin-left: 20px;"> 
+					<input [checked]="TipoDeUsuario.selected" type="checkbox" [value]="TipoDeUsuario.value" (change)="onchbTipoDeUsuario($event)">
+					{{TipoDeUsuario.name}}
+				</label>
             </div>
         </div>
+
         <div class="col-md-3">
             <h4>Tipo de Envio Faturamento</h4>
             <div class="form-group row check_blok">
-                <div class="col-md-12">
-                    <label class="col-xs-5 col-form-label control-label">Digitação</label>
-                    <div class="controls col-xs-3">
-                        <input class="check_blok" type="checkbox">
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <label class="col-xs-5 col-form-label control-label">Importação XML</label>
-                    <div class="controls col-xs-3">
-                        <input class="check_blok" type="checkbox">
-                    </div>
-                </div>
+                <div class="form-group row check_blok" style="margin-left: -5px;" *ngFor="let TipoDeEnvioFaturamento of tipo_de_envio_faturamento">
+					<label style="margin-left: 25px;"> 
+						<input [checked]="TipoDeEnvioFaturamento.selected" type="checkbox" [value]="TipoDeEnvioFaturamento.value" (change)="onchbTipoDeEnvioFaturamento($event)">
+						{{TipoDeEnvioFaturamento.name}}
+					</label>
+				</div>
             </div>
         </div>
         <div class="col-md-4">

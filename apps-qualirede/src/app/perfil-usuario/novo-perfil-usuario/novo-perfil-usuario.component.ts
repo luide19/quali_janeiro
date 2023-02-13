@@ -25,6 +25,17 @@ export class NovoPerfilUsuarioComponent {
   sucessmsg:any;
   ngOnInit(): void {}
 
+  tipo_de_usuario: Array<any> = [
+    {name:'Cliente', value:'Cliente'},
+    {name:'Colaborador', value:'Colaborador'},
+    {name:'Prestador', value:'Prestador'}
+  ]
+
+  tipo_de_envio_faturamento: Array<any> = [
+    {name:'Digitação', value:'Digitação'},
+    {name:'Importação XML', value:'Importação XML'}
+  ]
+
   //checkboxes dos perfis
   Cadastro: Array<any> = [
     {name: 'Analista de Cadastro', value: 'Cadastro - Analista de Cadastro'},
@@ -535,7 +546,7 @@ export class NovoPerfilUsuarioComponent {
         break;
     }   
   }
-  
+
   //listagem do checkbox marcado sem marcar todos
   onCheckboxChange(e:any){
     const perfis: FormArray = this.novo_perfil_usuario.get('perfis') as FormArray
@@ -547,6 +558,39 @@ export class NovoPerfilUsuarioComponent {
       perfis.controls.forEach((item:any) => {
         if(item.value == e.target.value){
           perfis.removeAt(i)
+          return
+        }
+        i++
+      })
+    }
+  }
+
+  //listagem do checkbox Tipo de Usuario
+  onchbTipoDeUsuario(e:any){
+    const tipo_de_usuario: FormArray = this.novo_perfil_usuario.get('tipo_de_usuario') as FormArray
+    if (e.target.checked) {
+      tipo_de_usuario.push(new FormControl(e.target.value))
+    }else{
+      let i:number = 0
+      tipo_de_usuario.controls.forEach((item:any) => {
+        if(item.value == e.target.value){
+          tipo_de_usuario.removeAt(i)
+          return
+        }
+        i++
+      })
+    }
+  }
+
+  onchbTipoDeEnvioFaturamento(e:any){
+    const tipo_de_envio_faturamento: FormArray = this.novo_perfil_usuario.get('tipo_de_envio_faturamento') as FormArray
+    if (e.target.checked) {
+      tipo_de_envio_faturamento.push(new FormControl(e.target.value))
+    }else{
+      let i:number = 0
+      tipo_de_envio_faturamento.controls.forEach((item:any) => {
+        if(item.value == e.target.value){
+          tipo_de_envio_faturamento.removeAt(i)
           return
         }
         i++
